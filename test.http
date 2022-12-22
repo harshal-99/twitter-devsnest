@@ -1,0 +1,25 @@
+### Create User
+POST http://localhost:3000/api/user
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "username": "john_doe"
+}
+
+### Create tweet
+POST http://localhost:3000/api/tweet
+Content-Type: application/json
+
+{
+    "tweet": "sec",
+    "userId": 1
+}
+
+### timeline
+POST http://localhost:3000/api/user/timeline
+Content-Type: application/json
+
+{
+  "userId": 1
+}
