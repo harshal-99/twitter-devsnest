@@ -1,16 +1,12 @@
-import {sequelize} from "../config/db.js";
-import {DataTypes} from "sequelize";
-
-const Tweet = sequelize.define('tweet', {
-	id: {
-		primaryKey: true,
-		autoIncrement: true,
-		type: DataTypes.INTEGER,
-	},
-	text: {
-		type: DataTypes.STRING,
-		allowNull: false,
-	},
-})
+class Tweet {
+	constructor(id, text, userId) {
+		this.id = id;
+		this.text = text;
+		this.userId = userId;
+		const date = new Date()
+		this.createdAt = date;
+		this.updatedAt = date;
+	}
+}
 
 export default Tweet

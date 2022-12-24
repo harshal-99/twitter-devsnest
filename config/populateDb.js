@@ -1,5 +1,80 @@
 import {faker} from "@faker-js/faker";
-import {Follower, Tweet, User} from "../models/index.js";
+import twitterService from "../service/twitter.service.js";
+import fs from "fs";
+
+let USERS = [
+	{
+		"id": 98858,
+		"name": "Clinton Zulauf",
+		"username": "Ally.Kulas",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 555,
+		"name": "Ellis Lehner",
+		"username": "Joy_Wunsch",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 78526,
+		"name": "Roxanne Feil",
+		"username": "Anastasia54",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 15470,
+		"name": "Bryan Sanford",
+		"username": "Jaiden_Flatley",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 8705,
+		"name": "Charlotte Lindgren Sr.",
+		"username": "Merlin54",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 82768,
+		"name": "Vicki Aufderhar",
+		"username": "Verlie_Muller",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 30301,
+		"name": "Otis Hirthe Jr.",
+		"username": "Katelin.Rempel",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 89471,
+		"name": "Caroline Beatty",
+		"username": "Jackie_White32",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 27849,
+		"name": "Bryant Cronin",
+		"username": "Giovani_Okuneva",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	},
+	{
+		"id": 71539,
+		"name": "Travis Quigley",
+		"username": "Cathrine.Renner",
+		"createdAt": "2022-12-24T08:06:51.706Z",
+		"updatedAt": "2022-12-24T08:06:51.706Z"
+	}
+], TWEETS = [], FOLLOWERS = []
+
 
 const createRandomUser = () => {
 	return {
@@ -14,38 +89,36 @@ const createRandomTweet = () => {
 }
 
 const populateDb = async () => {
-	let users = Array.from({length: 10}, createRandomUser)
-	users = await User.bulkCreate(users)
-	users = users.map(user => user.toJSON())
+	/*	Array
+			.from({length: 10}, createRandomUser)
+			.forEach(user => {
+				USERS.push(twitterService.createUser(user.name, user.username))
+			})*/
 
-	let tweets = Array.from({length: 10}, createRandomTweet)
 
-	tweets = tweets.map(tweet => {
-		return {
-			text: tweet,
-			userId: users.at(Math.floor(Math.random() * users.length)).id,
-		}
-	})
-	tweets = await Tweet.bulkCreate(tweets)
-	tweets = tweets.map(tweet => tweet.toJSON())
-	// console.log(tweets)
+	/*	let tweets = Array.from({length: 10}, createRandomTweet)
+		twitterService.resetData()
+		TWEETS = tweets.map(tweet => {
+			return twitterService.createTweet(
+				USERS.at(Math.floor(Math.random() * USERS.length)).id, tweet)
+		})*/
 
-	let start = 0, end = users.length - 1
-	let followers = []
+
+/*	let start = 0, end = USERS.length - 1
+	twitterService.resetData()
 	while (start <= end) {
-		const user = users.at(start)
-		const follower = users.at(end)
+		const user = USERS.at(start)
+		const follower = USERS.at(end)
 		if (user.id !== follower.id) {
-			followers.push(await Follower.create({
-				userId: user.id,
-				followerId: follower.id
-			}))
+			FOLLOWERS.push(twitterService.followUser(user.id, follower.id))
 		}
 		start++
 		end--
-	}
-	followers = followers.map(follower => follower.toJSON())
-	// console.log(followers)
-}
+	}*/
 
-export default populateDb
+/*	fs.writeFile('../data.json', JSON.stringify(FOLLOWERS), (err) => {
+		if (err) {
+			console.log(err)
+		}
+	})*/
+}

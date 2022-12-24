@@ -1,16 +1,12 @@
-import {sequelize} from "../config/db.js";
-import {DataTypes} from "sequelize";
-
-const Follower = sequelize.define('follower', {
-	id: {
-		primaryKey: true,
-		autoIncrement: true,
-		type: DataTypes.INTEGER,
-	},
-	followerId: {
-		type: DataTypes.INTEGER,
-		allowNull: false,
+class Follower {
+	constructor(id, userId, followerId) {
+		this.id = id;
+		this.userId = userId;
+		this.followerId = followerId;
+		const date = new Date()
+		this.createdAt = date;
+		this.updatedAt = date;
 	}
-})
+}
 
 export default Follower
