@@ -55,7 +55,7 @@ class TwitterService {
 		const foundFromUser = this.getUserById(toUserId)
 
 		if (!foundToUser || !foundFromUser) {
-			throw new Error(`${!fromUserId ? 'fromUserId' : 'toUserId'} is required`)
+			throw new Error(`${!fromUserId ? 'fromUserId' : 'toUserId'} is invalid`)
 		}
 
 		const newFollower = new Follower(faker.datatype.number(), toUserId, fromUserId)
@@ -71,7 +71,7 @@ class TwitterService {
 		const foundFromUser = this.getUserById(fromUserId)
 
 		if (!foundToUser || !foundFromUser) {
-			throw new Error(`${!fromUserId ? 'fromUserId' : 'toUserId'} is required`)
+			throw new Error(`${!fromUserId ? 'fromUserId' : 'toUserId'} is invalid`)
 		}
 
 		const follower = this.followers.find(follower => follower.userId === fromUserId && follower.followerId === toUserId)
