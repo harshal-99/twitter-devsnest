@@ -83,7 +83,7 @@ class TwitterService {
 
 	getTweetsByUserId = (userId) => {
 		const tweetsByUser = this.tweets.filter(tweet => tweet.userId === userId)
-		tweetsByUser.sort((a, b) => b.createdAt - a.createdAt)
+		tweetsByUser.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 		return tweetsByUser.slice(0, 10)
 	}
 
@@ -108,7 +108,7 @@ class TwitterService {
 			this.getTweetsByUserId(follower.followerId).forEach(tweet => tweets.push(tweet))
 		})
 
-		tweets.sort((a, b) => b.createdAt - a.createdAt)
+		tweets.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
 		return tweets.slice(0, 10)
 	}
 
