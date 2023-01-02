@@ -3,6 +3,11 @@ import twitterService from "../service/twitter.service.js";
 
 const userRouter = Router()
 
+userRouter.get('/',  async (req, res) => {
+	const users = twitterService.getAllUsers()
+	return res.status(200).json(users)
+})
+
 userRouter.post('/', async (req, res) => {
 	const {name, username} = req.body
 

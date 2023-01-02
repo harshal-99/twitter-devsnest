@@ -26,6 +26,10 @@ class TwitterService {
 		return newUser
 	}
 
+	getAllUsers = () => {
+		return this.users
+	}
+
 	getTweetById = (tweetId) => {
 		return this.tweets.find(tweet => tweet.id === tweetId)
 	}
